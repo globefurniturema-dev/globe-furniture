@@ -14,15 +14,28 @@ There is no build step. To preview changes:
 start index.html        # Windows — opens in default browser
 ```
 
-After every change, commit and push to GitHub:
+The `gh` CLI is at `C:\Program Files\GitHub CLI\gh.exe` (not on the default Bash PATH — use PowerShell for `gh` commands).
+
+## Git discipline — required after every task
+
+Commit and push to GitHub at the completion of every piece of work, no matter how small. This ensures no progress is ever lost and the repo always reflects the current state of the site.
 
 ```
 git add index.html
-git commit -m "description of change"
+git commit -m "short imperative summary of what changed"
 git push
 ```
 
-The `gh` CLI is at `C:\Program Files\GitHub CLI\gh.exe` (not on the default Bash PATH — use PowerShell for `gh` commands).
+Commit message rules:
+- Imperative mood, present tense: "Add dining section" not "Added" or "Adding"
+- First line ≤ 72 characters, specific to what actually changed
+- No vague messages like "update" or "fix stuff"
+
+Examples of good messages:
+- `Add outdoor furniture section to navigation`
+- `Update Fall River address to 40 County Street`
+- `Fix mobile layout on product cards`
+- `Add Facebook and Instagram links to footer`
 
 ## Architecture
 
