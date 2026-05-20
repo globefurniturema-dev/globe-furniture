@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Globe Furniture — Quality Furniture for 30 Years</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background: #f8f5f0;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: #1a2744;
+            padding: 0 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.35);
+        }
+
+        .logo {
+            color: #c9a96e;
+            font-size: 1.7rem;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: 2px;
+            cursor: pointer;
+            user-select: none;
+            text-transform: uppercase;
+        }
+        .logo span { color: #ffffff; }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #c0c8d8;
+            text-decoration: none;
+            font-size: 0.88rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: color 0.3s;
+            cursor: pointer;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #c9a96e;
+            border-bottom-color: #c9a96e;
+        }
+
+        .call-btn {
+            background: linear-gradient(135deg, #c9a96e, #b8934f);
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+            line-height: 1.4;
+            box-shadow: 0 3px 10px rgba(201,169,110,0.4);
+        }
+        .call-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 15px rgba(201,169,110,0.5); }
+        .call-btn .cta-label { font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; opacity: 0.9; }
+        .call-btn .phone-number { font-size: 1rem; font-weight: 800; letter-spacing: 1px; }
+
+        /* ===== PAGES ===== */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* ===== SLIDER ===== */
+        .slider {
+            position: relative;
+            height: 580px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slide.active { opacity: 1; }
+
+        .slide-1 { background: linear-gradient(135deg, #0d1b33 0%, #1a3060 40%, #243a70 70%, #1a2744 100%); }
+        .slide-2 { background: linear-gradient(135deg, #1c0c08 0%, #5a2d1e 40%, #7a3d28 70%, #3d1f14 100%); }
+        .slide-3 { background: linear-gradient(135deg, #0c1e14 0%, #1e5035 40%, #2a6b48 70%, #1a3326 100%); }
+        .slide-4 { background: linear-gradient(135deg, #1a150a 0%, #5a4a1e 40%, #7a6228 70%, #3d3214 100%); }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .slide-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            padding: 40px;
+            position: relative;
+        }
+        .slide-eyebrow {
+            color: #c9a96e;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .slide-content h2 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+        }
+        .slide-content p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.75);
+            letter-spacing: 2px;
+            margin-bottom: 35px;
+        }
+        .slide-btn {
+            background: transparent;
+            color: #c9a96e;
+            border: 2px solid #c9a96e;
+            padding: 14px 40px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 4px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+            transition: all 0.3s;
+            margin-right: 12px;
+        }
+        .slide-btn:hover { background: #c9a96e; color: white; }
+        .slide-btn-fill {
+            background: #c9a96e;
+            color: white;
+            border: 2px solid #c9a96e;
+            padding: 14px 40px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 4px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .slide-btn-fill:hover { background: #b8934f; border-color: #b8934f; }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            z-index: 10;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slider-arrow:hover { background: rgba(201,169,110,0.6); border-color: #c9a96e; }
+        .slider-prev { left: 25px; }
+        .slider-next { right: 25px; }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .dot.active { background: #c9a96e; transform: scale(1.2); }
+
+        /* ===== FINANCING BANNER ===== */
+        .financing-banner {
+            background: linear-gradient(90deg, #c9a96e, #b8934f);
+            color: white;
+            text-align: center;
+            padding: 16px 20px;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about-section {
+            padding: 80px 100px;
+            background: white;
+        }
+        .about-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+        .about-text .eyebrow {
+            color: #c9a96e;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .about-text h2 {
+            font-size: 2.2rem;
+            color: #1a2744;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .about-text p {
+            color: #666;
+            line-height: 1.85;
+            margin-bottom: 18px;
+            font-size: 0.97rem;
+        }
+        .about-text .highlight {
+            display: inline-block;
+            background: #f8f5f0;
+            border-left: 3px solid #c9a96e;
+            padding: 10px 18px;
+            font-style: italic;
+            color: #555;
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+
+        .about-badges {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .badge {
+            background: #f8f5f0;
+            border-radius: 10px;
+            padding: 28px 22px;
+            text-align: center;
+            border-top: 3px solid #c9a96e;
+            transition: transform 0.3s;
+        }
+        .badge:hover { transform: translateY(-3px); }
+        .badge-icon { font-size: 2.2rem; margin-bottom: 10px; }
+        .badge-val { font-size: 1.6rem; font-weight: 800; color: #1a2744; }
+        .badge-label { font-size: 0.8rem; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+        /* ===== SECTION HEADING ===== */
+        .sec-heading {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+        .sec-heading .eyebrow {
+            color: #c9a96e;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .sec-heading h2 {
+            font-size: 2rem;
+            color: #1a2744;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .sec-divider {
+            width: 55px;
+            height: 3px;
+            background: linear-gradient(90deg, #c9a96e, #b8934f);
+            margin: 14px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ===== COLLECTIONS GRID ===== */
+        .collections-section {
+            padding: 70px 100px;
+            background: #f8f5f0;
+        }
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .col-card {
+            position: relative;
+            height: 280px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.35s, box-shadow 0.35s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .col-card:hover { transform: translateY(-6px); box-shadow: 0 12px 35px rgba(0,0,0,0.25); }
+        .col-card.c-living  { background: linear-gradient(145deg, #243a70, #1a2744); }
+        .col-card.c-bedroom { background: linear-gradient(145deg, #7a3d28, #3d1f14); }
+        .col-card.c-mattress { background: linear-gradient(145deg, #2a6b48, #1a3326); }
+        .col-card.c-dining  { background: linear-gradient(145deg, #7a6228, #3d3214); }
+
+        .col-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .col-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            font-size: 4.5rem;
+            opacity: 0.25;
+        }
+        .col-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 22px;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+            color: white;
+        }
+        .col-overlay h3 {
+            font-size: 1.15rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+        .col-overlay p {
+            color: #c9a96e;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+        .col-arrow {
+            position: absolute;
+            bottom: 22px;
+            right: 18px;
+            color: #c9a96e;
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .col-card:hover .col-arrow { opacity: 1; }
+
+        /* ===== LOCATIONS ===== */
+        .locations-section {
+            padding: 70px 100px;
+            background: white;
+        }
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .loc-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 18px rgba(0,0,0,0.09);
+        }
+        .loc-header {
+            background: #1a2744;
+            color: white;
+            padding: 20px 24px;
+        }
+        .loc-header h3 {
+            font-size: 1.05rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+        .loc-header p {
+            color: #c9a96e;
+            font-size: 0.8rem;
+            margin-top: 3px;
+        }
+        .loc-body {
+            background: #fdfcfa;
+            padding: 22px 24px;
+        }
+        .loc-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 0.92rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .loc-row:last-child { margin-bottom: 0; }
+        .loc-icon { color: #c9a96e; min-width: 16px; margin-top: 2px; font-style: normal; }
+        .loc-row a { color: #1a2744; text-decoration: none; font-weight: 600; }
+        .loc-row a:hover { color: #c9a96e; }
+
+        /* ===== PAGE HEADERS ===== */
+        .page-header {
+            background: linear-gradient(135deg, #0d1b33, #1a2744);
+            padding: 55px 100px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        .page-header .ph-eyebrow {
+            color: #c9a96e;
+            font-size: 0.78rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .page-header h1 {
+            font-size: 2.8rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 800;
+            position: relative;
+        }
+        .page-header p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-top: 8px;
+            position: relative;
+        }
+
+        /* ===== CATEGORY TABS ===== */
+        .cat-tabs {
+            background: white;
+            padding: 0 100px;
+            display: flex;
+            border-bottom: 2px solid #eee;
+            overflow-x: auto;
+        }
+        .tab-btn {
+            padding: 18px 28px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.82rem;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.3s;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .tab-btn:hover { color: #1a2744; }
+        .tab-btn.active { color: #1a2744; border-bottom-color: #c9a96e; }
+
+        /* ===== PRODUCTS ===== */
+        .products-wrap {
+            padding: 45px 100px 60px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 26px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .prod-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .prod-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.14); }
+        .prod-img {
+            height: 210px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .prod-img .big-icon {
+            font-size: 5rem;
+            opacity: 0.55;
+            position: relative;
+            z-index: 1;
+        }
+        .prod-body { padding: 22px; }
+        .prod-body h3 {
+            color: #1a2744;
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+        .prod-body .prod-desc {
+            color: #888;
+            font-size: 0.85rem;
+            line-height: 1.55;
+            margin-bottom: 15px;
+        }
+        .prod-price {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #c9a96e;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .price-tag {
+            background: #fff8ee;
+            border: 1px solid #c9a96e;
+            color: #c9a96e;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .call-for-price {
+            background: #1a2744;
+            color: white;
+            border: none;
+            padding: 11px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            width: 100%;
+            transition: background 0.3s;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .call-for-price:hover { background: #c9a96e; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #0f1a30;
+            color: white;
+            padding: 60px 100px 30px;
+        }
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.3fr 2fr 1fr;
+            gap: 60px;
+            padding-bottom: 45px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 30px;
+        }
+        .ft-brand .ft-logo {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: #c9a96e;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+        .ft-brand .ft-logo span { color: white; }
+        .ft-brand p {
+            color: #888;
+            font-size: 0.88rem;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        .ft-brand .ft-fin {
+            background: rgba(201,169,110,0.12);
+            border: 1px solid rgba(201,169,110,0.3);
+            color: #c9a96e;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+        .social-row { display: flex; gap: 12px; }
+        .soc-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: transparent;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .soc-btn:hover { background: #c9a96e; border-color: #c9a96e; }
+
+        .ft-locs h4 {
+            color: #c9a96e;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+            font-weight: 700;
+        }
+        .ft-locs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+        .ft-loc strong {
+            color: white;
+            display: block;
+            font-size: 0.88rem;
+            margin-bottom: 6px;
+        }
+        .ft-loc span {
+            color: #777;
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+
+        .ft-contact h4 {
+            color: #c9a96e;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+            font-weight: 700;
+        }
+        .ft-contact-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 14px;
+            font-size: 0.88rem;
+            color: #888;
+            line-height: 1.5;
+        }
+        .ft-contact-row a { color: #c9a96e; text-decoration: none; }
+        .ft-contact-row a:hover { text-decoration: underline; }
+        .ft-icon { color: #c9a96e; min-width: 16px; }
+
+        .footer-bottom {
+            text-align: center;
+            color: #555;
+            font-size: 0.82rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== CALL MODAL ===== */
+        .modal-bg {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        .modal-bg.open { display: flex; }
+        .modal-box {
+            background: white;
+            border-radius: 14px;
+            padding: 45px 40px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.35);
+            position: relative;
+        }
+        .modal-close-x {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            color: #aaa;
+        }
+        .modal-close-x:hover { color: #333; }
+        .modal-box .m-icon { font-size: 2.5rem; margin-bottom: 10px; }
+        .modal-box h2 { color: #1a2744; font-size: 1.4rem; margin-bottom: 8px; }
+        .modal-box .m-sub { color: #888; font-size: 0.9rem; margin-bottom: 20px; }
+        .modal-box .m-phone {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #c9a96e;
+            letter-spacing: 2px;
+            margin: 20px 0;
+        }
+        .modal-box .m-phone a { color: #c9a96e; text-decoration: none; }
+        .modal-box .m-phone a:hover { text-decoration: underline; }
+        .modal-box .m-email {
+            color: #1a2744;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .modal-box .m-email a { color: #1a2744; text-decoration: none; }
+        .modal-box .m-email a:hover { color: #c9a96e; }
+        .modal-box .m-fin {
+            background: #f8f5f0;
+            border: 1px solid #e0d4c0;
+            color: #8b6914;
+            padding: 12px 18px;
+            border-radius: 7px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+        .modal-close-btn {
+            background: #1a2744;
+            color: white;
+            border: none;
+            padding: 13px 35px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+        .modal-close-btn:hover { background: #c9a96e; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .navbar { padding: 0 25px; }
+            .about-section, .collections-section, .locations-section,
+            .products-wrap, .page-header, .cat-tabs, footer { padding-left: 30px; padding-right: 30px; }
+            .about-inner { grid-template-columns: 1fr; gap: 40px; }
+            .footer-top { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; height: auto; padding: 12px 20px; gap: 12px; }
+            .nav-links { gap: 15px; flex-wrap: wrap; }
+            .slider { height: 380px; }
+            .slide-content h2 { font-size: 2.2rem; }
+            .collections-grid { grid-template-columns: repeat(2, 1fr); }
+            .locations-grid { grid-template-columns: 1fr; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-top { grid-template-columns: 1fr; gap: 35px; }
+            .ft-locs-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 500px) {
+            .products-grid { grid-template-columns: 1fr; }
+            .collections-grid { grid-template-columns: 1fr; }
+            .about-badges { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================= NAVBAR ============================= -->
+<nav class="navbar">
+    <div class="logo" onclick="showPage('home')">Globe <span>Furniture</span></div>
+
+    <ul class="nav-links">
+        <li><a id="nav-home" class="active" onclick="showPage('home')">Home</a></li>
+        <li><a id="nav-living" onclick="showPage('living')">Living Room</a></li>
+        <li><a id="nav-bedroom" onclick="showPage('bedroom')">Bedroom</a></li>
+        <li><a id="nav-mattresses" onclick="showPage('mattresses')">Mattresses</a></li>
+        <li><a id="nav-dining" onclick="showPage('dining')">Dining</a></li>
+    </ul>
+
+    <button class="call-btn" onclick="openModal()">
+        <span class="cta-label">Call Us</span>
+        <span class="phone-number">508-677-4185</span>
+    </button>
+</nav>
+
+<!-- ============================= CALL MODAL ============================= -->
+<div class="modal-bg" id="callModal" onclick="modalBgClick(event)">
+    <div class="modal-box">
+        <button class="modal-close-x" onclick="closeModal()">&#10005;</button>
+        <div class="m-icon">&#128222;</div>
+        <h2>Globe Furniture</h2>
+        <p class="m-sub">We'd love to help you find the perfect furniture for your home.</p>
+        <div class="m-phone"><a href="tel:5086774185">508-677-4185</a></div>
+        <div class="m-email">&#9993; <a href="mailto:globefurniturema@gmail.com">globefurniturema@gmail.com</a></div>
+        <div class="m-fin">&#10024; Financing Available Through ASEMA</div>
+        <button class="modal-close-btn" onclick="closeModal()">Close</button>
+    </div>
+</div>
+
+<!-- ============================= HOME PAGE ============================= -->
+<div id="page-home" class="page active">
+
+    <!-- SLIDER -->
+    <div class="slider" id="mainSlider">
+        <div class="slide slide-1 active">
+            <div class="slide-content">
+                <p class="slide-eyebrow">Globe Furniture Collection</p>
+                <h2>Living Room</h2>
+                <p>Sofas &bull; Sectionals &bull; Recliners</p>
+                <button class="slide-btn-fill" onclick="showPage('living')">Explore Now</button>
+            </div>
+        </div>
+        <div class="slide slide-2">
+            <div class="slide-content">
+                <p class="slide-eyebrow">Globe Furniture Collection</p>
+                <h2>Bedroom</h2>
+                <p>Complete Bedroom Sets for Every Style</p>
+                <button class="slide-btn-fill" onclick="showPage('bedroom')">Explore Now</button>
+            </div>
+        </div>
+        <div class="slide slide-3">
+            <div class="slide-content">
+                <p class="slide-eyebrow">Globe Furniture Collection</p>
+                <h2>Mattresses</h2>
+                <p>Comfort &amp; Support You Can Count On</p>
+                <button class="slide-btn-fill" onclick="showPage('mattresses')">Explore Now</button>
+            </div>
+        </div>
+        <div class="slide slide-4">
+            <div class="slide-content">
+                <p class="slide-eyebrow">Globe Furniture Collection</p>
+                <h2>Dining</h2>
+                <p>Gather Around in Style</p>
+                <button class="slide-btn-fill" onclick="showPage('dining')">Explore Now</button>
+            </div>
+        </div>
+        <button class="slider-arrow slider-prev" onclick="changeSlide(-1)">&#8592;</button>
+        <button class="slider-arrow slider-next" onclick="changeSlide(1)">&#8594;</button>
+        <div class="slider-dots">
+            <div class="dot active" onclick="goToSlide(0)"></div>
+            <div class="dot" onclick="goToSlide(1)"></div>
+            <div class="dot" onclick="goToSlide(2)"></div>
+            <div class="dot" onclick="goToSlide(3)"></div>
+        </div>
+    </div>
+
+    <!-- FINANCING BANNER -->
+    <div class="financing-banner">
+        &#10024; Financing Available Through ASEMA &mdash; Making Quality Furniture Affordable for Every Family
+    </div>
+
+    <!-- ABOUT -->
+    <section class="about-section">
+        <div class="about-inner">
+            <div class="about-text">
+                <p class="eyebrow">About Us</p>
+                <h2>A Family Legacy Built on Quality &amp; Trust</h2>
+                <p>Welcome to Globe Furniture &mdash; your trusted, family-owned furniture destination serving southeastern Massachusetts for over <strong>30 years</strong>. We take pride in being a cornerstone of our local communities, providing quality furniture and exceptional personal service to thousands of families throughout the region.</p>
+                <p>As a family business, we understand what it takes to make a house feel like home. Our knowledgeable team is dedicated to helping you find the perfect pieces that match your style, space, and budget &mdash; from elegant living room sets to complete bedroom suites and everything in between.</p>
+                <p>With three convenient showrooms across southeastern Massachusetts, we make it easy to find the furniture you've been dreaming of. Stop by and let our friendly team help you transform your home today.</p>
+                <div class="highlight">"We've been proudly serving Massachusetts families for over 30 years &mdash; come see the Globe Furniture difference."</div>
+            </div>
+            <div class="about-badges">
+                <div class="badge">
+                    <div class="badge-icon">&#127968;</div>
+                    <div class="badge-val">Family</div>
+                    <div class="badge-label">Owned &amp; Operated</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-icon">&#128197;</div>
+                    <div class="badge-val">30+</div>
+                    <div class="badge-label">Years in Business</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-icon">&#128205;</div>
+                    <div class="badge-val">3</div>
+                    <div class="badge-label">MA Showrooms</div>
+                </div>
+                <div class="badge">
+                    <div class="badge-icon">&#128179;</div>
+                    <div class="badge-val">ASEMA</div>
+                    <div class="badge-label">Financing Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOP BY CATEGORY -->
+    <section class="collections-section">
+        <div class="sec-heading">
+            <p class="eyebrow">Browse Our Showroom</p>
+            <h2>Shop by Category</h2>
+            <div class="sec-divider"></div>
+        </div>
+        <div class="collections-grid">
+            <div class="col-card c-living" onclick="showPage('living')">
+                <div class="col-icon">&#128715;</div>
+                <div class="col-overlay">
+                    <h3>Living Room</h3>
+                    <p>Sofas &bull; Sectionals &bull; Recliners</p>
+                </div>
+                <div class="col-arrow">&#8594;</div>
+            </div>
+            <div class="col-card c-bedroom" onclick="showPage('bedroom')">
+                <div class="col-icon">&#128716;</div>
+                <div class="col-overlay">
+                    <h3>Bedroom</h3>
+                    <p>Complete Bedroom Sets</p>
+                </div>
+                <div class="col-arrow">&#8594;</div>
+            </div>
+            <div class="col-card c-mattress" onclick="showPage('mattresses')">
+                <div class="col-icon">&#128564;</div>
+                <div class="col-overlay">
+                    <h3>Mattresses</h3>
+                    <p>Comfort &amp; Support</p>
+                </div>
+                <div class="col-arrow">&#8594;</div>
+            </div>
+            <div class="col-card c-dining" onclick="showPage('dining')">
+                <div class="col-icon">&#127860;</div>
+                <div class="col-overlay">
+                    <h3>Dining</h3>
+                    <p>Tables &amp; Dining Sets</p>
+                </div>
+                <div class="col-arrow">&#8594;</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATIONS -->
+    <section class="locations-section">
+        <div class="sec-heading">
+            <p class="eyebrow">Find Us Near You</p>
+            <h2>Our Locations</h2>
+            <div class="sec-divider"></div>
+        </div>
+        <div class="locations-grid">
+            <div class="loc-card">
+                <div class="loc-header">
+                    <h3>Fall River</h3>
+                    <p>Massachusetts</p>
+                </div>
+                <div class="loc-body">
+                    <div class="loc-row">
+                        <i class="loc-icon">&#128205;</i>
+                        <span>40 County Street<br>Fall River, MA</span>
+                    </div>
+                    <div class="loc-row">
+                        <i class="loc-icon">&#9993;</i>
+                        <a href="mailto:globefurniturema@gmail.com">globefurniturema@gmail.com</a>
+                    </div>
+                    <div class="loc-row">
+                        <i class="loc-icon">&#128222;</i>
+                        <a href="tel:5086774185">508-677-4185</a>
+                    </div>
+                </div>
+            </div>
+            <div class="loc-card">
+                <div class="loc-header">
+                    <h3>New Bedford</h3>
+                    <p>Massachusetts</p>
+                </div>
+                <div class="loc-body">
+                    <div class="loc-row">
+                        <i class="loc-icon">&#128205;</i>
+                        <span>89 Rodney French Blvd<br>New Bedford, MA</span>
+                    </div>
+                    <div class="loc-row">
+                        <i class="loc-icon">&#9993;</i>
+                        <a href="mailto:globefurniturema@gmail.com">globefurniturema@gmail.com</a>
+                    </div>
+                    <div class="loc-row">
+                        <i class="loc-icon">&#128222;</i>
+                        <a href="tel:5086774185">508-677-4185</a>
+                    </div>
+                </div>
+            </div>
+            <div class="loc-card">
+                <div class="loc-header">
+                    <h3>Randolph</h3>
+                    <p>Massachusetts</p>
+                </div>
+                <div class="loc-body">
+                    <div class="loc-row">
+                        <i class="loc-icon">&#128205;</i>
+                        <span>101 Maseo Dr<br>Randolph, MA</span>
+                    </div>
+                    <div class="loc-row">
+                        <i class="loc-icon">&#9993;</i>
+                        <a href="mailto:globefurniturema@gmail.com">globefurniturema@gmail.com</a>
+                    </div>
+                    <div class="loc-row">
+                        <i class="loc-icon">&#128222;</i>
+                        <a href="tel:5086774185">508-677-4185</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div><!-- end #page-home -->
+
+<!-- ============================= LIVING ROOM PAGE ============================= -->
+<div id="page-living" class="page">
+    <div class="page-header">
+        <p class="ph-eyebrow">Globe Furniture</p>
+        <h1>Living Room</h1>
+        <p>Sofas &amp; Love Seats &bull; Sectionals &bull; Recliners</p>
+    </div>
+    <div class="cat-tabs" id="living-tabs">
+        <button class="tab-btn active" onclick="switchTab('sofas', this, 'living-tabs', 'living-grid')">Sofas &amp; Love Seats</button>
+        <button class="tab-btn" onclick="switchTab('sectionals', this, 'living-tabs', 'living-grid')">Sectionals</button>
+        <button class="tab-btn" onclick="switchTab('recliners', this, 'living-tabs', 'living-grid')">Recliners</button>
+    </div>
+    <div class="products-wrap">
+        <div class="products-grid" id="living-grid"></div>
+    </div>
+</div>
+
+<!-- ============================= BEDROOM PAGE ============================= -->
+<div id="page-bedroom" class="page">
+    <div class="page-header">
+        <p class="ph-eyebrow">Globe Furniture</p>
+        <h1>Bedroom</h1>
+        <p>Complete Bedroom Sets for Every Style</p>
+    </div>
+    <div class="products-wrap">
+        <div class="products-grid" id="bedroom-grid"></div>
+    </div>
+</div>
+
+<!-- ============================= MATTRESSES PAGE ============================= -->
+<div id="page-mattresses" class="page">
+    <div class="page-header">
+        <p class="ph-eyebrow">Globe Furniture</p>
+        <h1>Mattresses</h1>
+        <p>Find Your Perfect Night's Sleep</p>
+    </div>
+    <div class="products-wrap">
+        <div class="products-grid" id="mattresses-grid"></div>
+    </div>
+</div>
+
+<!-- ============================= DINING PAGE ============================= -->
+<div id="page-dining" class="page">
+    <div class="page-header">
+        <p class="ph-eyebrow">Globe Furniture</p>
+        <h1>Dining</h1>
+        <p>Gather Around in Style</p>
+    </div>
+    <div class="products-wrap">
+        <div class="products-grid" id="dining-grid"></div>
+    </div>
+</div>
+
+<!-- ============================= FOOTER ============================= -->
+<footer>
+    <div class="footer-top">
+        <div class="ft-brand">
+            <div class="ft-logo">Globe <span>Furniture</span></div>
+            <p>Family-owned and serving southeastern Massachusetts for over 30 years. We're committed to quality furniture and exceptional service for every home.</p>
+            <div class="ft-fin">&#10024; Financing Available Through ASEMA</div>
+            <div class="social-row">
+                <a href="#" id="fb-link" class="soc-btn" title="Facebook" target="_blank" rel="noopener noreferrer"><strong>f</strong></a>
+                <a href="#" id="ig-link" class="soc-btn" title="Instagram" target="_blank" rel="noopener noreferrer">&#128247;</a>
+            </div>
+        </div>
+        <div class="ft-locs">
+            <h4>Our Locations</h4>
+            <div class="ft-locs-grid">
+                <div class="ft-loc">
+                    <strong>Fall River</strong>
+                    <span>40 County Street<br>Fall River, MA</span>
+                </div>
+                <div class="ft-loc">
+                    <strong>New Bedford</strong>
+                    <span>89 Rodney French Blvd<br>New Bedford, MA</span>
+                </div>
+                <div class="ft-loc">
+                    <strong>Randolph</strong>
+                    <span>101 Maseo Dr<br>Randolph, MA</span>
+                </div>
+            </div>
+        </div>
+        <div class="ft-contact">
+            <h4>Contact Us</h4>
+            <div class="ft-contact-row">
+                <i class="ft-icon">&#128222;</i>
+                <span><a href="tel:5086774185">508-677-4185</a></span>
+            </div>
+            <div class="ft-contact-row">
+                <i class="ft-icon">&#9993;</i>
+                <span><a href="mailto:globefurniturema@gmail.com">globefurniturema@gmail.com</a></span>
+            </div>
+            <div class="ft-contact-row">
+                <i class="ft-icon">&#128205;</i>
+                <span>Fall River &bull; New Bedford<br>Randolph, MA</span>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2024 Globe Furniture. All rights reserved. &mdash; Family-Owned &amp; Operated in Massachusetts for 30+ Years.
+    </div>
+</footer>
+
+<!-- ============================= JAVASCRIPT ============================= -->
+<script>
+// ---- PRODUCT DATA ----
+const catalog = {
+    sofas: [
+        { name: "Modern Comfort Sofa", desc: "Clean lines with plush cushioning and a durable fabric upholstery.", bg: "#e8ddd0", icon: "&#128715;" },
+        { name: "Classic Elegance Sofa", desc: "Timeless silhouette with tufted back and solid wood legs.", bg: "#ddd4c8", icon: "&#128715;" },
+        { name: "Contemporary Fabric Sofa", desc: "Deep seating with wide track armrests and reversible cushions.", bg: "#e2d8cc", icon: "&#128715;" },
+        { name: "Velvet Luxe Loveseat", desc: "Rich velvet upholstery with tapered solid-wood legs.", bg: "#d8cfc5", icon: "&#128715;" },
+        { name: "Casual Living Loveseat", desc: "Sink-in comfort with soft microfiber and pillow armrests.", bg: "#e5ddd5", icon: "&#128715;" },
+        { name: "Mid-Century Modern Loveseat", desc: "Retro-inspired design with solid wood frame and button tufting.", bg: "#ddd0c0", icon: "&#128715;" },
+        { name: "Chesterfield Sofa", desc: "Iconic rolled arm design with deep button tufting.", bg: "#e0d4c0", icon: "&#128715;" },
+        { name: "Fabric Loveseat", desc: "Compact two-seat sofa perfect for smaller living spaces.", bg: "#d4ccbf", icon: "&#128715;" },
+        { name: "Sleeper Sofa", desc: "Converts into a comfortable full-size bed for overnight guests.", bg: "#e6ddd3", icon: "&#128715;" },
+    ],
+    sectionals: [
+        { name: "L-Shape Sectional", desc: "Versatile L-shape design — ideal for large, open living spaces.", bg: "#ddd4c8", icon: "&#128715;" },
+        { name: "U-Shape Sectional", desc: "Maximum seating for the whole family with deep cushions.", bg: "#e0d8cc", icon: "&#128715;" },
+        { name: "Modular Sectional", desc: "Configurable individual pieces to fit any room layout.", bg: "#d8d0c4", icon: "&#128715;" },
+        { name: "Reversible Chaise Sectional", desc: "Convertible chaise that attaches on either side.", bg: "#e4dcd0", icon: "&#128715;" },
+        { name: "Power Reclining Sectional", desc: "Built-in power recliners at each end for ultimate comfort.", bg: "#dcd4c8", icon: "&#128715;" },
+        { name: "Sectional with Ottoman", desc: "Includes a large matching ottoman for extended comfort.", bg: "#e2d8cc", icon: "&#128715;" },
+    ],
+    recliners: [
+        { name: "Power Lift Recliner", desc: "Electric lift mechanism to assist getting up with ease.", bg: "#e0d5c8", icon: "&#128186;" },
+        { name: "Massage &amp; Heat Recliner", desc: "Built-in massage nodes and soothing heat panels.", bg: "#ddd0c4", icon: "&#128186;" },
+        { name: "Classic Rocker Recliner", desc: "Traditional rocking motion with smooth full recline.", bg: "#e4dcd2", icon: "&#128186;" },
+        { name: "Wall Hugger Recliner", desc: "Reclines fully while staying just inches from the wall.", bg: "#dcd4ca", icon: "&#128186;" },
+        { name: "Swivel Glider Recliner", desc: "360&deg; swivel with smooth gliding motion — perfect for nurseries.", bg: "#e2d8ce", icon: "&#128186;" },
+        { name: "Big &amp; Tall Recliner", desc: "Extra-wide seat with reinforced frame for superior comfort.", bg: "#d8d0c6", icon: "&#128186;" },
+    ],
+    bedroom: [
+        { name: "King Bedroom Set", desc: "Includes king bed frame, dresser, mirror, and two nightstands.", bg: "#d0c8bc", icon: "&#128716;" },
+        { name: "Queen Bedroom Set", desc: "Complete queen set with panel headboard, dresser, and chest.", bg: "#ccc4b8", icon: "&#128716;" },
+        { name: "California King Bedroom Set", desc: "Spacious Cal King with full storage drawer options.", bg: "#d4ccbf", icon: "&#128716;" },
+        { name: "Twin Bedroom Set", desc: "Great for kids' rooms — includes twin bed and matching pieces.", bg: "#c8c0b4", icon: "&#128716;" },
+        { name: "Full Bedroom Set", desc: "Full-size set ideal for teen rooms and guest bedrooms.", bg: "#cec6ba", icon: "&#128716;" },
+        { name: "Contemporary King Set", desc: "Modern upholstered headboard with accent LED lighting strip.", bg: "#d2cabd", icon: "&#128716;" },
+        { name: "Farmhouse Bedroom Set", desc: "Reclaimed wood finish with warm, rustic character.", bg: "#c6beb2", icon: "&#128716;" },
+        { name: "Sleigh Bed Bedroom Set", desc: "Elegant curved headboard and footboard with matching pieces.", bg: "#ccc4b7", icon: "&#128716;" },
+        { name: "Storage Platform Bedroom Set", desc: "Under-bed drawers built right in for maximum storage.", bg: "#d0c8bb", icon: "&#128716;" },
+    ],
+    mattresses: [
+        { name: "Memory Foam Mattress", desc: "Contouring memory foam for full body pressure relief.", bg: "#c8d4e0", icon: "&#128564;" },
+        { name: "Hybrid Mattress", desc: "Foam comfort layers combined with innerspring coil support.", bg: "#c4ccd8", icon: "&#128564;" },
+        { name: "Innerspring Mattress", desc: "Traditional coil construction with great bounce and support.", bg: "#ccd4e0", icon: "&#128564;" },
+        { name: "Pillow Top Mattress", desc: "Extra cushioning layer sewn right into the mattress top.", bg: "#c0c8d4", icon: "&#128564;" },
+        { name: "Gel Memory Foam Mattress", desc: "Cooling gel beads regulate temperature for a cool sleep.", bg: "#c8d0dc", icon: "&#128564;" },
+        { name: "Firm Support Mattress", desc: "Extra firm — ideal for back and stomach sleepers.", bg: "#c4ccd4", icon: "&#128564;" },
+        { name: "Euro Top Mattress", desc: "Flush euro top design with luxury cushioning layers.", bg: "#ccd8e4", icon: "&#128564;" },
+        { name: "Plush Mattress", desc: "Soft, plush comfort — perfect for side sleepers.", bg: "#c0ccd8", icon: "&#128564;" },
+    ],
+    dining: [
+        { name: "Round Dining Table Set", desc: "Round table with 4 chairs — perfect for intimate gatherings.", bg: "#d4c8b8", icon: "&#127860;" },
+        { name: "Rectangle Dining Table Set", desc: "Seats 6 comfortably with matching upholstered side chairs.", bg: "#d0c4b4", icon: "&#127860;" },
+        { name: "Counter Height Dining Set", desc: "Pub-style counter height table with matching bar stools.", bg: "#d8ccbc", icon: "&#127860;" },
+        { name: "Extendable Dining Table", desc: "Adjustable leaf extensions to seat more guests.", bg: "#ccc0b0", icon: "&#127860;" },
+        { name: "Farmhouse Dining Table", desc: "Solid wood construction with bench seating included.", bg: "#d4c8b8", icon: "&#127860;" },
+        { name: "Glass Top Dining Table", desc: "Tempered glass top on a sleek modern metal base.", bg: "#d0c4b4", icon: "&#127860;" },
+        { name: "Marble-Look Dining Set", desc: "Luxurious marble-look surface with velvet upholstered chairs.", bg: "#d8ccbc", icon: "&#127860;" },
+        { name: "5-Piece Dining Set", desc: "Complete set — rectangular table and four matching chairs.", bg: "#ccc0b0", icon: "&#127860;" },
+        { name: "7-Piece Dining Set", desc: "Generous 7-piece set perfect for large families and entertaining.", bg: "#d4c8b8", icon: "&#127860;" },
+    ]
+};
+
+// ---- RENDER PRODUCTS ----
+function renderProducts(gridId, key) {
+    const items = catalog[key];
+    document.getElementById(gridId).innerHTML = items.map(item => `
+        <div class="prod-card">
+            <div class="prod-img" style="background:${item.bg};">
+                <span class="big-icon">${item.icon}</span>
+            </div>
+            <div class="prod-body">
+                <h3>${item.name}</h3>
+                <p class="prod-desc">${item.desc}</p>
+                <div class="prod-price"><span class="price-tag">Contact for Price</span></div>
+                <button class="call-for-price" onclick="openModal()">Call for Details &mdash; 508-677-4185</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// ---- TAB SWITCHER ----
+function switchTab(key, btn, tabsId, gridId) {
+    document.querySelectorAll('#' + tabsId + ' .tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderProducts(gridId, key);
+}
+
+// ---- PAGE NAVIGATION ----
+function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    const navEl = document.getElementById('nav-' + name);
+    if (navEl) navEl.classList.add('active');
+
+    if (name === 'living') {
+        // reset to first tab
+        document.querySelectorAll('#living-tabs .tab-btn').forEach((b, i) => b.classList.toggle('active', i === 0));
+        renderProducts('living-grid', 'sofas');
+    } else if (name === 'bedroom')    renderProducts('bedroom-grid', 'bedroom');
+    else if (name === 'mattresses')  renderProducts('mattresses-grid', 'mattresses');
+    else if (name === 'dining')      renderProducts('dining-grid', 'dining');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ---- SLIDER ----
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dots   = document.querySelectorAll('.dot');
+let autoTimer = setInterval(() => changeSlide(1), 4500);
+
+function goToSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = ((n % slides.length) + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+}
+function changeSlide(dir) { goToSlide(currentSlide + dir); }
+
+const sliderEl = document.getElementById('mainSlider');
+sliderEl.addEventListener('mouseenter', () => clearInterval(autoTimer));
+sliderEl.addEventListener('mouseleave', () => { autoTimer = setInterval(() => changeSlide(1), 4500); });
+
+// ---- MODAL ----
+function openModal() { document.getElementById('callModal').classList.add('open'); }
+function closeModal() { document.getElementById('callModal').classList.remove('open'); }
+function modalBgClick(e) { if (e.target === document.getElementById('callModal')) closeModal(); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>
