@@ -57,7 +57,7 @@ Everything lives in `index.html` — HTML, CSS, and JavaScript are all inline. T
 - Email: `globefurniturema@gmail.com`
 - Financing note: "Financing Available Through ASEMA"
 - Colors: navy `#1a2744`, gold `#c9a96e`, warm white `#f8f5f0`
-- Locations: 40 County St, Fall River MA · 89 Rodney French Blvd, New Bedford MA · 101 Maseo Dr, Randolph MA
+- Locations: 40 County St, Fall River MA · 101 Mazzeo Dr, Randolph MA (New Bedford location closed Sep 2026)
 
 ## GitHub
 
